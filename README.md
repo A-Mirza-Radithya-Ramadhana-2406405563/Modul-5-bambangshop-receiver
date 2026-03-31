@@ -86,4 +86,14 @@ This is the place for you to write reflections:
 
 #### Reflection Subscriber-1
 
+1. Karena operasi read kemungkinan akan lebih sering daripada write. Mutex hanya mengizinkan 1 thread yang menulis/membaca pada satu waktu, sehingga untuk membaca harus bergantian. Sementara, RwLock hanya akan mengunci ketika ada thread yang menulis, sehingga proses pembacaan dapat dilakukan bersamaan dan lebih efisien.
+
+2. Rust tidak mengizinkan mutable static secara langsung karena alasan keamanan. Hal ini dilakukan untuk mencegah terjadinya race condition antar thread. Sebagai gantinya, rust menyediakan lazy_static yang dapat dikombinasikan dengan Mutex atau RwLock, sehingga keamanan terhadpa race condition lebih terkendali.
+
 #### Reflection Subscriber-2
+
+1. Ya, saya sudah mencoba untuk melihat file lib.rs. Di sana, saya melihat bagaimana dependencies dari aplikasi diatur dan juga konfigurasi, seperti port dan juga nama aplikasi.
+
+2. Observer pattern memudahkan penambahan subscriber karena kita tidak perlu mengubah kode utama. Cukup menambahkan subscriber baru, dan sistem akan otomatis mengirim notifikasi.Namun, jika terdapat banyak instance main app, akan muncul tantangan sinkronisasi data antar instance. Dalam kasus tersebut, diperlukan solusi tambahan seperti message broker.
+
+3. Ya, tetapi saya tidak melakukannya di tutorial ini karena saya rasa koleksi yang disediakan sudah cukup membantu. Saya sudah pernah memakainya di Group Project untuk mengetes API yang saya buat. Fitur script juga saya gunakan sebagai salah satu pipeline CI untuk memastikan API yang saya buat sesuai dengan apa yang seharusnya.
